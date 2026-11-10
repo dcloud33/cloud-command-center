@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import ProjectEditor from './ProjectEditor'
 import type { Project } from './ProjectEditor'
+import { loadProjects, saveProjects } from './projectStorage'
 
 type Theme = 'light' | 'dark' | 'system'
 
@@ -32,25 +33,39 @@ const seedProjects = [
 
 function App() {
   const [theme, setTheme] = useState<Theme>(readTheme)
-  const [projects, setProjects] = useState<Project[]>(() =>
-    seedProjects.map(project => ({
+  const [initialStorage] = useState(() =>
+    loadProjects(seedProjects.map(project => ({
       ...project,
       status: 'Planned',
       repository: '',
-    })),
+    }))),
   )
+  const [projects, setProjects] = useState<Project[]>(initialStorage.projects)
+  const [storageSnapshot, setStorageSnapshot] = useState(initialStorage.snapshot)
+  const [storageMessage, setStorageMessage] = useState(initialStorage.error)
   const [editor, setEditor] = useState<Project | 'new' | null>(null)
 
   function saveProject(project: Project) {
-    setProjects(previous =>
-      previous.some(item => item.id === project.id)
-        ? previous.map(item => item.id === project.id ? project : item)
-        : [...previous, project],
-    )
+    const nextProjects = projects.some(item => item.id === project.id)
+      ? projects.map(item => item.id === project.id ? project : item)
+      : [...projects, project]
+
+    const result = saveProjects(nextProjects, storageSnapshot)
+
+    if (!result.ok) {
+      setStorageMessage(result.error)
+      return
+    }
+
+    setProjects(nextProjects)
+    setStorageSnapshot(result.snapshot)
+    setStorageMessage('Projects saved in this browser.')
     setSelectedProject(project.id)
     setEditor(null)
   }
-  const [selectedProject, setSelectedProject] = useState('pulseforge')
+  const [selectedProject, setSelectedProject] = useState(
+    initialStorage.projects[0].id,
+  )
   const [themeMessage, setThemeMessage] = useState('')
 
   useEffect(() => {
@@ -156,6 +171,7 @@ function App() {
               project={editor === 'new' ? undefined : editor}
               onSave={saveProject}
               onCancel={() => setEditor(null)}
+              storageMessage={storageMessage}
             />
           )}
 
@@ -183,10 +199,11 @@ function App() {
           </div>
 
           <p className="notice">
-            Project edits currently last until refresh. Only appearance is saved.
-            Persistent project storage, tasks, and evidence tracking come next.
+            Projects save in this browser profile and site address.
+            They do not sync across devices. Export and import are planned.
           </p>
 
+          <p role="status">{storageMessage}</p>
           <p role="status">{themeMessage}</p>
         </main>
 
