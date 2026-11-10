@@ -1,75 +1,68 @@
-# React + TypeScript + Vite
+# Cloud Command Center
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An in-progress engineering portfolio dashboard built with React,
+TypeScript, and Vite inside an Ubuntu lab VM.
 
-Currently, two official plugins are available:
+## Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Organize personal GitHub projects, identify the next task, and
+connect technical progress to measurable evidence.
 
-## React Compiler
+Each user will be able to track their own projects. PulseForge and
+Forge AI Platform are separate sample workstreams.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Implemented
 
-## Expanding the ESLint configuration
+- Responsive command center layout.
+- Project selection.
+- Light, Dark, and System appearance options.
+- Appearance preference saved in browser storage.
+- Add and edit project records.
+- Project names, categories, descriptions, and statuses.
+- Validated GitHub repository links.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Current limitations
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Project changes are held in React memory and reset on refresh.
+Only the appearance preference persists.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+There are no accounts, shared database, automatic GitHub
+synchronization, or live AI mentoring features yet.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Run locally
 
+Use the Node.js version recorded in .nvmrc.
+
+```sh
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+For development through a VM network adapter:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
 ```
+
+## Checks
+
+```sh
+npm run lint
+npm run build
+```
+
+## Next milestone
+
+Add browser-local project persistence with validation and
+visible save errors. Then add current tasks and export/import.
+
+## Planned
+
+Milestones, incident records, ADRs, evidence tracking, deployment,
+and operational verification.
+
+## Project context
+
+Independent portfolio and learning project, built with AI-assisted
+guidance. Features are implemented incrementally and are not
+represented as professional production experience.

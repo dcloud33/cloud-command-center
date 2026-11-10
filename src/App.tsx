@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import ProjectEditor from './ProjectEditor'
+import type { Project } from './ProjectEditor'
 
 type Theme = 'light' | 'dark' | 'system'
 
@@ -13,7 +15,7 @@ function readTheme(): Theme {
   return 'system'
 }
 
-const projects = [
+const seedProjects = [
   {
     id: 'pulseforge',
     name: 'PulseForge',
@@ -30,6 +32,24 @@ const projects = [
 
 function App() {
   const [theme, setTheme] = useState<Theme>(readTheme)
+  const [projects, setProjects] = useState<Project[]>(() =>
+    seedProjects.map(project => ({
+      ...project,
+      status: 'Planned',
+      repository: '',
+    })),
+  )
+  const [editor, setEditor] = useState<Project | 'new' | null>(null)
+
+  function saveProject(project: Project) {
+    setProjects(previous =>
+      previous.some(item => item.id === project.id)
+        ? previous.map(item => item.id === project.id ? project : item)
+        : [...previous, project],
+    )
+    setSelectedProject(project.id)
+    setEditor(null)
+  }
   const [selectedProject, setSelectedProject] = useState('pulseforge')
   const [themeMessage, setThemeMessage] = useState('')
 
@@ -125,7 +145,19 @@ function App() {
             </div>
           </section>
 
-          <h2 className="section-heading">Your projects</h2>
+          <div className="section-toolbar">
+            <h2 className="section-heading">Your projects</h2>
+            <button onClick={() => setEditor('new')}>Add project</button>
+          </div>
+
+          {editor !== null && (
+            <ProjectEditor
+              key={editor === 'new' ? 'new' : editor.id}
+              project={editor === 'new' ? undefined : editor}
+              onSave={saveProject}
+              onCancel={() => setEditor(null)}
+            />
+          )}
 
           <div className="project-grid">
             {projects.map(project => (
@@ -133,14 +165,26 @@ function App() {
                 <p className="eyebrow">{project.category}</p>
                 <h3>{project.name}</h3>
                 <p>{project.description}</p>
-                <span className="badge">Sample project record</span>
+                <span className="badge">{project.status}</span>
+                <div className="actions">
+                  <button onClick={() => setEditor(project)}>Edit project</button>
+                  {project.repository && (
+                    <a
+                      href={project.repository}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open GitHub ↗
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
 
           <p className="notice">
-            Foundation build: project editing, tasks, and evidence tracking
-            are planned. Only the appearance preference is saved at this stage.
+            Project edits currently last until refresh. Only appearance is saved.
+            Persistent project storage, tasks, and evidence tracking come next.
           </p>
 
           <p role="status">{themeMessage}</p>
