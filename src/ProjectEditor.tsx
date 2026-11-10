@@ -14,12 +14,14 @@ type Props = {
   project?: Project
   onSave: (project: Project) => void
   onCancel: () => void
+  storageMessage: string
 }
 
 export default function ProjectEditor({
   project,
   onSave,
   onCancel,
+  storageMessage,
 }: Props) {
   const [error, setError] = useState('')
 
@@ -125,7 +127,7 @@ export default function ProjectEditor({
           />
         </label>
 
-        <p role="alert">{error}</p>
+        <p role="alert">{error || storageMessage}</p>
 
         <div className="actions">
           <button type="submit">Save project</button>
