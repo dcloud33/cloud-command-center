@@ -58,7 +58,7 @@ function isProject(value: unknown): value is Project {
   )
 }
 
-function isProjectList(value: unknown): value is Project[] {
+export function isProjectList(value: unknown): value is Project[] {
   if (!Array.isArray(value) || value.length === 0) return false
   if (!value.every(isProject)) return false
 
