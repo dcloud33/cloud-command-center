@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import ProjectEditor from './ProjectEditor'
+import CurrentTaskPanel from './CurrentTaskPanel'
 import type { Project } from './ProjectEditor'
 import { loadProjects, saveProjects } from './projectStorage'
 
@@ -156,9 +157,15 @@ function App() {
             <h2 id="focus-title">{currentProject.name}</h2>
             <p>{currentProject.description}</p>
             <div className="focus-footer">
-              Next: add an editable current task for this project.
+              Track one focused task for this project below.
             </div>
           </section>
+
+          <CurrentTaskPanel
+            key={currentProject.id}
+            projectId={currentProject.id}
+            projectName={currentProject.name}
+          />
 
           <div className="section-toolbar">
             <h2 className="section-heading">Your projects</h2>
