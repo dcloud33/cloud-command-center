@@ -37,7 +37,7 @@ function isTaskStatus(value: unknown): value is TaskStatus {
   return TASK_STATUSES.some(status => status === value)
 }
 
-function isTask(value: unknown, projectId: string): value is CurrentTask {
+export function isTask(value: unknown, projectId: string): value is CurrentTask {
   if (typeof value !== 'object' || value === null) return false
 
   const task = value as Record<string, unknown>

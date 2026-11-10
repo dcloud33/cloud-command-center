@@ -195,3 +195,28 @@ footer {
 .task-panel { margin-top: 24px; }
 .task-text { white-space: pre-wrap; overflow-wrap: anywhere; }
 .actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.editor > h3 { margin-top: 28px; }
+.backup-preview {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.backup-preview li {
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+
+.editor .restore-confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+.editor .restore-confirmation input {
+  width: auto;
+  flex-shrink: 0;
+  margin-top: 5px;
+}

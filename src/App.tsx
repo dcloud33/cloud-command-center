@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import ProjectEditor from './ProjectEditor'
 import CurrentTaskPanel from './CurrentTaskPanel'
+import WorkspaceBackupPanel from './WorkspaceBackupPanel'
 import type { Project } from './ProjectEditor'
 import { loadProjects, saveProjects } from './projectStorage'
 
@@ -151,6 +152,8 @@ function App() {
           <p className="intro">
             One focused task. Clear reasoning. Evidence you can explain.
           </p>
+
+          <WorkspaceBackupPanel />
 
           <section className="focus" aria-labelledby="focus-title">
             <p className="eyebrow">SELECTED PROJECT</p>
