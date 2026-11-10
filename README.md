@@ -3,6 +3,12 @@
 An in-progress engineering portfolio dashboard built with React,
 TypeScript, and Vite inside an Ubuntu lab VM.
 
+## Workspace preview
+
+![Cloud Command Center in dark mode with separate project cards and GitHub repository links](docs/images/workspace-dark.png)
+
+*Local development build showing project selection, editable project cards, and a GitHub repository link. Project records currently reset on refresh; only the appearance preference persists.*
+
 ## Purpose
 
 Organize personal GitHub projects, identify the next task, and
