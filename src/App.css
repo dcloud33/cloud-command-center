@@ -191,3 +191,7 @@ footer {
 
 .editor textarea { min-height: 100px; resize: vertical; }
 .editor [role='alert'] { margin: 0; color: var(--text); }
+
+.task-panel { margin-top: 24px; }
+.task-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.actions button:disabled { opacity: 0.5; cursor: not-allowed; }
