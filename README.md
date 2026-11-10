@@ -7,7 +7,7 @@ TypeScript, and Vite inside an Ubuntu lab VM.
 
 ![Cloud Command Center in dark mode with separate project cards and GitHub repository links](docs/images/workspace-dark.png)
 
-*Local development build showing project selection, editable project cards, and a GitHub repository link. Project records currently reset on refresh; only the appearance preference persists.*
+*Local development build showing project selection, editable project cards, and a GitHub repository link. Projects and appearance now persist in browser-local storage.*
 
 ## Purpose
 
@@ -29,8 +29,15 @@ Forge AI Platform are separate sample workstreams.
 
 ## Current limitations
 
-Project changes are held in React memory and reset on refresh.
-Only the appearance preference persists.
+Projects and appearance preferences persist in browser-local storage.
+Records are specific to the browser profile and site address.
+They do not sync across devices.
+
+Saving is blocked when stored projects cannot be loaded or when
+a sequential stale-tab change is detected.
+
+See [persistence verification](docs/verification/project-persistence.md)
+for the checks performed and their limits.
 
 There are no accounts, shared database, automatic GitHub
 synchronization, or live AI mentoring features yet.
@@ -59,8 +66,7 @@ npm run build
 
 ## Next milestone
 
-Add browser-local project persistence with validation and
-visible save errors. Then add current tasks and export/import.
+Add current tasks and validated project export/import.
 
 ## Planned
 
