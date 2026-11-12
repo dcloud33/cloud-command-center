@@ -210,7 +210,7 @@ function App() {
 
           <p className="notice">
             Projects save in this browser profile and site address.
-            They do not sync across devices. Export and import are planned.
+            They do not automatically sync across devices. Export a backup to keep a separate copy. Restore requires empty workspace storage.
           </p>
 
           <p role="status">{storageMessage}</p>
