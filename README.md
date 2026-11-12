@@ -3,6 +3,12 @@
 An in-progress engineering portfolio dashboard built with React,
 TypeScript, and Vite inside an Ubuntu lab VM.
 
+## Try the hosted app
+
+[Open Cloud Command Center](https://dcloud33.github.io/cloud-command-center/)
+
+Each browser has its own local workspace. Export backups to keep a separate copy of saved projects and tasks.
+
 ## Workspace preview
 
 ![Cloud Command Center in dark mode with separate project cards and GitHub repository links](docs/images/workspace-dark.png)
@@ -61,6 +67,7 @@ Manual checks and their limitations are documented here:
 - [Project persistence](docs/verification/project-persistence.md)
 - [Current tasks](docs/verification/current-task.md)
 - [Workspace backup](docs/verification/workspace-backup.md)
+- [Hosted browser release](docs/verification/hosted-release.md)
 
 Storage write failures, interrupted restores, and simultaneous
 writes remain unverified.
@@ -89,8 +96,8 @@ npm run build
 
 ## Next milestone
 
-Prepare the first hosted browser release and verify the shared
-application with classmates.
+Collect classmate feedback and verify backup export and restore
+on the hosted application.
 
 ## Planned
 
